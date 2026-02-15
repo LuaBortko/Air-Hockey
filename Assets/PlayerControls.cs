@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public float speed = 7.0f;             // Define a velocidade da raquete
+    public float speed = 15.0f;             // Define a velocidade da raquete
     public float boundY = 0f;            // Define os limites em Y
     private Rigidbody2D rb2d;               // Define o corpo rigido 2D que representa a raquete
 
@@ -17,17 +17,41 @@ public class PlayerControls : MonoBehaviour
     {
         Vector2 playerPos = transform.position;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
-        Vector3 dir = mousePos - playerPos;
-        dir.Normalize();
-        Vector2 forceVec = dir * speed;
-        float forceX = forceVec.x;
-        float forceY = forceVec.y;
+        float distance = Vector2.Distance(playerPos, mousePos);
 
-        var vel = rb2d.linearVelocity;
-        vel.x = forceX;
-        vel.y = forceY;
-        rb2d.linearVelocity = vel; 
+        if(distance > 0.1f){
+            Vector3 dir = mousePos - playerPos;
+            dir.Normalize();
+            Vector2 forceVec = dir * speed;
+            float forceX = forceVec.x;
+            float forceY = forceVec.y;
+
+            var vel = rb2d.linearVelocity;
+            vel.x = forceX;
+            vel.y = forceY;
+
+            rb2d.linearVelocity = vel; 
+
+        }else{
+
+            rb2d.linearVelocity = Vector2.zero;
+
+        }
+
+        // Controle para o player não passar das bordas
+
+        if (playerPos.y > 4.45f) {                  
+            playerPos.y = 4.45f;                     // Corrige a posicao da raquete caso ele ultrapasse o limite superior
+        }
+        else if (playerPos.y < 0.5f) {
+            playerPos.y = 0.5f;                    // Corrige a posicao da raquete caso ele ultrapasse o limite inferior
+        }else if (playerPos.x > 2.8f) {                  
+            playerPos.x = 2.8f;                     // Corrige a posicao da raquete caso ele ultrapasse o limite da direita
+        }
+        else if (playerPos.x < -2.8f) {
+            playerPos.x = -2.8f;                    // Corrige a posicao da raquete caso ele ultrapasse o limite da esquerda
+        }
+        transform.position = playerPos;               // Atualiza a posição da raquete
 
     }
 }
