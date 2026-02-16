@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public float speed = 15.0f;             // Define a velocidade da raquete
-    public float boundY = 0f;            // Define os limites em Y
+    public float speed = 10.0f;             // Define a velocidade da raquete
     private Rigidbody2D rb2d;               // Define o corpo rigido 2D que representa a raquete
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,7 +19,7 @@ public class PlayerControls : MonoBehaviour
         float distance = Vector2.Distance(playerPos, mousePos);
 
         if(distance > 0.1f){
-            Vector3 dir = mousePos - playerPos;
+            Vector2 dir = mousePos - playerPos;
             dir.Normalize();
             Vector2 forceVec = dir * speed;
             float forceX = forceVec.x;
