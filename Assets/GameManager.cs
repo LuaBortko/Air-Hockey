@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public static void Score (string wallID) {
         GameManager gm = FindAnyObjectByType<GameManager>();
-        if (wallID == "bottom"){
+        if (wallID == "top"){
             PlayerScore1++;
             if(PlayerScore1 != 5){
                 gm.theBall.SendMessage("BallP2", null, SendMessageOptions.RequireReceiver);

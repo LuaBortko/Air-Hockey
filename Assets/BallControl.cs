@@ -3,8 +3,10 @@ using UnityEngine;
 public class BallControl : MonoBehaviour
 {
     private Rigidbody2D rb2d; 
+    public AudioSource source;
     // Determina o comportamento da bola nas colisões com os Players (raquetes)
     void OnCollisionEnter2D (Collision2D coll) {
+        source.Play();
         if(coll.collider.CompareTag("Player")){
             Vector2 vel;
             vel.x = (rb2d.linearVelocity.x / 2) + (coll.collider.attachedRigidbody.linearVelocity.x / 3);
@@ -23,12 +25,12 @@ public class BallControl : MonoBehaviour
 
     }
 
-    void BallP1(){
+    void BallP2(){
         rb2d.linearVelocity = Vector2.zero;
         transform.position = new Vector3(0f, 2f, transform.position.z);
     }
 
-    void BallP2(){
+    void BallP1(){
         rb2d.linearVelocity = Vector2.zero;
         transform.position = new Vector3(0f, -2f, transform.position.z);
     }
@@ -48,6 +50,7 @@ public class BallControl : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>(); // Inicializa o objeto bola
+        source = GetComponent<AudioSource>();
         ResetBall();
     }
 

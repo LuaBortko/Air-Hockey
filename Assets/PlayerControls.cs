@@ -38,12 +38,11 @@ public class PlayerControls : MonoBehaviour
         }
 
         // Controle para o player não passar das bordas
-
-        if (playerPos.y > 4.45f) {                  
-            playerPos.y = 4.45f;                     // Corrige a posicao da raquete caso ele ultrapasse o limite superior
+        if (playerPos.y > -0.5f) {                  
+            playerPos.y = -0.5f;                     // Corrige a posicao da raquete caso ele ultrapasse o limite superior
         }
-        else if (playerPos.y < 0.5f) {
-            playerPos.y = 0.5f;                    // Corrige a posicao da raquete caso ele ultrapasse o limite inferior
+        else if (playerPos.y < -4.45f) {
+            playerPos.y = -4.45f;                    // Corrige a posicao da raquete caso ele ultrapasse o limite inferior
         }else if (playerPos.x > 2.8f) {                  
             playerPos.x = 2.8f;                     // Corrige a posicao da raquete caso ele ultrapasse o limite da direita
         }
@@ -51,6 +50,7 @@ public class PlayerControls : MonoBehaviour
             playerPos.x = -2.8f;                    // Corrige a posicao da raquete caso ele ultrapasse o limite da esquerda
         }
         transform.position = playerPos;               // Atualiza a posição da raquete
+
 
     }
 }
